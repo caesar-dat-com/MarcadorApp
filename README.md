@@ -1,97 +1,53 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# MarcadorApp 🍎
 
-# Getting Started
+An elegant, Apple-inspired React Native application for managing sports matches, player profiles, and court reservations.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+### 💎 Liquid Glass Design
+-   **Premium Aesthetic**: Utilizes high-transparency blur effects, mesh gradients, and hairline borders ensuring a native iOS feel.
+-   **Dark Glass Theme**: Optimized for contrast and readability on all devices, with safety fallbacks for asset loading failures.
+-   **Fluid Animations**: Smooth transitions and touch feedback.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### 🏠 Match Play (Marcador)
+-   **Score Tracking**: Gestural interface to track scores for Player 1 & 2.
+-   **Haptic Feedback**: Satisfying vibration feedback on every interaction.
+-   **History Saving**: Persists match results locally.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### 👤 Profile (Perfil)
+-   **Gamer Card**: Displays your Avatar, Rank (e.g., Diamond II), and Level.
+-   **Stats Tracking**: Visualizes Wins, Matches Played, and Win Rate inspired by Apple Fitness rings.
 
-```sh
-# Using npm
-npm start
+### 📅 Booking System (Reservas)
+-   **Active Courts**: View real-time (mocked) status of courts.
+-   **Player Finder**: See exactly how many players are missing for a match (e.g., "FALTAN 2").
+-   **Reservations**: Create new bookings instantly.
+-   **Challenge Mode**: "Retar" (Challenge) existing teams directly from the list.
 
-# OR using Yarn
-yarn start
-```
+## Tech Stack
+-   **React Native**: Core framework.
+-   **React Navigation**: Tab-based navigation system.
+-   **AsyncStorage**: Local data persistence.
+-   **TypeScript**: Type safety for data models.
 
-## Step 2: Build and run your app
+## How to Run
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+1.  **Install Dependencies**:
+    ```bash
+    npm install
+    ```
 
-### Android
+2.  **Start Metro Bundler**:
+    ```bash
+    npm start
+    ```
 
-```sh
-# Using npm
-npm run android
+3.  **Run on Android**:
+    ```bash
+    npm run android
+    ```
+    *Note: Ensure you have an Android Emulator running (e.g., `emulator -avd Medium_Phone_API_36.1`).*
 
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Asset Credits
+-   **Mesh Gradient**: Custom generated "Apple Style" wallpaper.
+-   **Icons**: Standard emoji text for lightweight implementation.
