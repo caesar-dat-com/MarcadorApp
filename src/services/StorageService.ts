@@ -12,7 +12,7 @@ export interface Match {
 const STORAGE_KEY = '@marcador_app_history';
 
 export const StorageService = {
-    saveMatch: async (matchData: Omit<Match, 'id' | 'date'>) => {
+    saveMatch: async (matchData: Omit<Match, 'id' | 'date'>): Promise<boolean> => {
         try {
             const existingHistoryJson = await AsyncStorage.getItem(STORAGE_KEY);
             const history: Match[] = existingHistoryJson ? JSON.parse(existingHistoryJson) : [];
@@ -25,8 +25,10 @@ export const StorageService = {
 
             const updatedHistory = [newMatch, ...history];
             await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedHistory));
+            return true;
         } catch (error) {
-            console.error('Error saving match:', error);
+            console.error('storage.saveMatch.failed', { error });
+            return false;
         }
     },
 

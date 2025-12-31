@@ -54,17 +54,21 @@ const MarcadorScreen = () => {
     const winner = scoreA > scoreB ? 'Jugador 1' : scoreA < scoreB ? 'Jugador 2' : 'Empate';
 
     try {
-      await StorageService.saveMatch({
+      const saved = await StorageService.saveMatch({
         winner,
         score: `${scoreA} - ${scoreB}`,
         player1Name: 'Jugador 1',
         player2Name: 'Jugador 2',
       });
+      if (!saved) {
+        throw new Error('StorageService.saveMatch returned failure');
+      }
       feedback.success();
       Alert.alert('¡Guardado!', 'El partido se ha registrado en el historial.', [
         { text: 'OK', onPress: resetMatch }
       ]);
     } catch (error) {
+      console.error('match.save.failed', { error, scoreA, scoreB, winner });
       feedback.error();
       Alert.alert('Error', 'Hubo un problema al guardar el partido.');
     }
