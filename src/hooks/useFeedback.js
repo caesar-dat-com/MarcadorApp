@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 // Stub for FeedBack to allow build processing
 // Native modules for Sound/Haptics removed temporarily due to build conflict
 

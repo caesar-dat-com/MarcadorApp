@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Text, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
-    withSpring,
-    useDerivedValue,
-    interpolateColor
+    withSpring
 } from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
 
