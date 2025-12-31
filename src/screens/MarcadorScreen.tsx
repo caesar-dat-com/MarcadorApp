@@ -83,7 +83,7 @@ const MarcadorScreen = () => {
       style={styles.backgroundImage}
       resizeMode="cover"
     >
-      <SafeAreaView style={styles.container} edges={['top']}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>MATCH PLAY</Text>
         </View>

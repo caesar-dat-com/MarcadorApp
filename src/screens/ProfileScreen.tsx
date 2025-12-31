@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, SafeAreaView, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, ImageBackground } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import GlassContainer from '../components/GlassContainer';
 import { CURRENT_USER } from '../services/MockData';
 
@@ -12,7 +13,7 @@ const ProfileScreen = () => {
             style={styles.backgroundImage}
             resizeMode="cover"
         >
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
                 <ScrollView contentContainerStyle={styles.scrollContent}>
 
                     {/* Header Avatar */}
