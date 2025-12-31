@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, Alert, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert, ImageBackground } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import GlassContainer from '../components/GlassContainer';
 import { MOCK_BOOKINGS, Booking } from '../services/MockData';
 
@@ -66,7 +67,7 @@ const BookingScreen = () => {
             style={styles.backgroundImage}
             resizeMode="cover"
         >
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
                 <View style={styles.header}>
                     <Text style={styles.headerTitle}>Canchas Activas</Text>
                     <TouchableOpacity style={styles.reserveBtn} onPress={handleReserve}>
