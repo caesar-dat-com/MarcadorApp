@@ -14,10 +14,10 @@ const LiquidBackground = () => {
         body { margin: 0; overflow: hidden; background-color: #0a0e27; }
         #webGLApp { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <script>
+        const startApp = () => {
         // TouchTexture class
         class TouchTexture {
             constructor() {
@@ -351,6 +351,25 @@ const LiquidBackground = () => {
             }
         }
         new App();
+        };
+
+        const loadThree = () => {
+            if (window.THREE) {
+                startApp();
+                return;
+            }
+
+            const script = document.createElement("script");
+            script.src = "three.min.js";
+            script.onload = startApp;
+            script.onerror = () => {
+                document.body.style.backgroundColor = "#0a0e27";
+                document.body.innerHTML = "<div style=\\"color:#fff;font-family:sans-serif;padding:16px;\\">Visualización no disponible sin conexión.</div>";
+            };
+            document.head.appendChild(script);
+        };
+
+        loadThree();
     </script>
 </body>
 </html>
@@ -362,7 +381,6 @@ const LiquidBackground = () => {
                 source={{ html: htmlContent }}
                 style={{ backgroundColor: 'transparent' }}
                 scrollEnabled={false}
-                pointerEvents="none"
             />
         </View>
     );
