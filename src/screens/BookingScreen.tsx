@@ -9,7 +9,7 @@ const BookingScreen = () => {
     const handleChallenge = (booking: Booking) => {
         Alert.alert(
             '🔥 RETADOR EN CAMINO',
-            `Has retado a **${booking.hostName}** en la ${booking.courtName}.`,
+            `Has retado a ${booking.hostName} en la ${booking.courtName}.`,
             [{ text: '¡A DARLE!', onPress: () => console.log('Challenge Sent') }]
         );
     };
