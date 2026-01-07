@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
         color: T.colors.muted,
         fontSize: 16,
         fontWeight: '700',
+        marginBottom: 0,
     },
     value: {
         color: T.colors.text,
