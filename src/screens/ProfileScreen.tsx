@@ -1,192 +1,160 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, ImageBackground } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import GlassContainer from '../components/GlassContainer';
+import { View, Text, StyleSheet, Image, ScrollView, Alert } from 'react-native';
+import { CartoonBackground } from '../components/CartoonBackground';
+import { CartoonCard } from '../components/CartoonCard';
+import { CartoonButton } from '../components/CartoonButton';
+import { CartoonBadge } from '../components/CartoonBadge';
+import { CartoonTheme as T } from '../theme/cartoonTheme';
 import { CURRENT_USER } from '../services/MockData';
 
 const ProfileScreen = () => {
     const user = CURRENT_USER;
 
+    const handleEditProfile = () => {
+        Alert.alert('Perfil', 'Próximamente podrás editar tus datos.');
+    };
+
     return (
-        <ImageBackground
-            source={require('../assets/background.png')}
-            style={styles.backgroundImage}
-            resizeMode="cover"
-        >
-            <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-                <ScrollView contentContainerStyle={styles.scrollContent}>
+        <CartoonBackground>
+            <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
 
-                    {/* Header Avatar */}
-                    <View style={styles.avatarSection}>
-                        <View style={styles.avatarContainer}>
-                            <Image source={{ uri: user.avatarUrl }} style={styles.avatar} />
-                        </View>
-                        <Text style={styles.userName}>{user.name}</Text>
-                        <Text style={styles.userRank}>{user.rank} • Lvl {user.level}</Text>
+                {/* Header Avatar Section */}
+                <CartoonCard style={styles.headerCard}>
+                    <View style={styles.avatarWrapper}>
+                        <Image source={{ uri: user.avatarUrl }} style={styles.avatar} />
+                    </View>
+                    <Text style={styles.userName}>{user.name} 👤</Text>
+                    <CartoonBadge text={`${user.rank} • Lvl ${user.level}`} tone="purple" />
+
+                    <CartoonButton
+                        title="EDITAR PERFIL"
+                        leftEmoji="✏️"
+                        variant="ghost"
+                        onPress={handleEditProfile}
+                        style={{ marginTop: T.spacing.md, width: '100%' }}
+                    />
+                </CartoonCard>
+
+                {/* Stats Grid */}
+                <View style={styles.statsRow}>
+                    <CartoonCard style={styles.statCard}>
+                        <Text style={styles.statValue}>{user.stats.wins}</Text>
+                        <Text style={styles.statLabel}>VICTORIAS 🏆</Text>
+                    </CartoonCard>
+                    <CartoonCard style={styles.statCard}>
+                        <Text style={styles.statValue}>{user.stats.winRate}</Text>
+                        <Text style={styles.statLabel}>WIN RATE 📈</Text>
+                    </CartoonCard>
+                </View>
+
+                {/* Detailed Stats */}
+                <CartoonCard style={styles.detailsCard}>
+                    <Text style={styles.sectionTitle}>TEMPORADA ACTUAL 🌟</Text>
+
+                    <View style={styles.statLine}>
+                        <Text style={styles.label}>Total Partidos</Text>
+                        <Text style={styles.value}>{user.stats.matches}</Text>
                     </View>
 
-                    {/* Stats Cards */}
-                    <View style={styles.statsRow}>
-                        <GlassContainer style={styles.statCard} intensity={25}>
-                            <View style={styles.statContent}>
-                                <Text style={styles.statValue}>{user.stats.wins}</Text>
-                                <Text style={styles.statLabel}>VICTORIAS</Text>
-                            </View>
-                        </GlassContainer>
-                        <GlassContainer style={styles.statCard} intensity={25}>
-                            <View style={styles.statContent}>
-                                <Text style={styles.statValue}>{user.stats.winRate}</Text>
-                                <Text style={styles.statLabel}>WIN RATE</Text>
-                            </View>
-                        </GlassContainer>
+                    <View style={styles.divider} />
+
+                    <View style={styles.statLine}>
+                        <Text style={styles.label}>Racha Actual</Text>
+                        <Text style={styles.value}>3 🔥</Text>
                     </View>
 
-                    {/* Detailed Stats / Bio */}
-                    <GlassContainer style={styles.wideCard} intensity={15}>
-                        <View style={styles.wideContent}>
-                            <Text style={styles.sectionTitle}>Estadísticas de Temporada</Text>
-                            <View style={styles.row}>
-                                <Text style={styles.label}>Total Partidos</Text>
-                                <Text style={styles.value}>{user.stats.matches}</Text>
-                            </View>
-                            <View style={styles.divider} />
-                            <View style={styles.row}>
-                                <Text style={styles.label}>Racha Actual</Text>
-                                <Text style={styles.value}>3 🔥</Text>
-                            </View>
-                        </View>
-                    </GlassContainer>
+                    <CartoonButton
+                        title="VER LOGROS"
+                        leftEmoji="🏅"
+                        variant="blue"
+                        onPress={() => Alert.alert('Logros', '¡Sigue jugando para desbloquear más!')}
+                        style={{ marginTop: T.spacing.md }}
+                    />
+                </CartoonCard>
 
-                </ScrollView>
-            </SafeAreaView>
-        </ImageBackground>
+            </ScrollView>
+        </CartoonBackground>
     );
 };
 
 const styles = StyleSheet.create({
-    backgroundImage: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#000000',
-    },
-    container: {
-        flex: 1,
-        backgroundColor: 'transparent',
-    },
     scrollContent: {
-        padding: 20,
-        paddingBottom: 100,
-        alignItems: 'center',
+        paddingBottom: 110,
+        gap: T.spacing.md,
     },
-    avatarSection: {
-        marginTop: 50,
-        marginBottom: 40,
+    headerCard: {
         alignItems: 'center',
+        paddingVertical: T.spacing.xl,
+        marginTop: T.spacing.md,
     },
-    avatarContainer: {
-        width: 110,
-        height: 110,
-        borderRadius: 55,
-        borderWidth: 0, // No heavy border
-        marginBottom: 16,
+    avatarWrapper: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: T.colors.bg,
+        borderWidth: 4,
+        borderColor: T.colors.border,
+        marginBottom: T.spacing.md,
         overflow: 'hidden',
-        // Floating shadow
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.4,
-        shadowRadius: 20,
-        elevation: 15,
-        backgroundColor: '#1C1C1E',
     },
     avatar: {
         width: '100%',
         height: '100%',
     },
     userName: {
-        color: '#FFFFFF',
-        fontSize: 32,
-        fontWeight: '700',
-        marginBottom: 6,
-        letterSpacing: 0.3,
-    },
-    userRank: {
-        color: '#FFD60A', // Gold
-        fontSize: 15,
-        fontWeight: '600',
-        letterSpacing: 0.5,
-        backgroundColor: 'rgba(255, 214, 10, 0.15)',
-        paddingVertical: 6,
-        paddingHorizontal: 16,
-        borderRadius: 20,
-        overflow: 'hidden',
+        color: T.colors.text,
+        fontSize: 26,
+        fontWeight: '900',
+        marginBottom: 8,
     },
     statsRow: {
         flexDirection: 'row',
-        gap: 16,
-        width: '100%',
-        marginBottom: 24,
+        gap: T.spacing.md,
     },
     statCard: {
         flex: 1,
-        height: 140, // Taller cards
-        borderRadius: 24,
-    },
-    statContent: {
-        flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        padding: 16,
+        paddingVertical: T.spacing.lg,
     },
     statValue: {
-        color: '#fff',
-        fontSize: 38, // Huge
-        fontWeight: '300', // Thin
-        fontVariant: ['tabular-nums'],
+        color: T.colors.text,
+        fontSize: 32,
+        fontWeight: '900',
     },
     statLabel: {
-        color: '#0A84FF', // Accent Color
-        fontSize: 13,
-        fontWeight: '700',
-        letterSpacing: 0.5,
-        marginTop: 8,
-        textTransform: 'uppercase',
+        color: T.colors.muted,
+        fontSize: 12,
+        fontWeight: '800',
+        marginTop: 4,
     },
-    wideCard: {
-        width: '100%',
-        borderRadius: 28,
-        marginBottom: 24,
-    },
-    wideContent: {
-        padding: 24,
+    detailsCard: {
+        padding: T.spacing.lg,
     },
     sectionTitle: {
-        color: 'rgba(255,255,255,0.9)',
-        fontSize: 20,
-        fontWeight: '600',
-        marginBottom: 20,
-        letterSpacing: 0.3,
+        color: T.colors.text,
+        fontSize: 18,
+        fontWeight: '900',
+        marginBottom: T.spacing.md,
     },
-    row: {
+    statLine: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
         paddingVertical: 12,
     },
     label: {
-        color: 'rgba(255,255,255,0.6)',
-        fontSize: 17,
-        fontWeight: '400',
+        color: T.colors.muted,
+        fontSize: 16,
+        fontWeight: '700',
+        marginBottom: 0,
     },
     value: {
-        color: '#fff',
-        fontSize: 17,
-        fontWeight: '500',
-        fontVariant: ['tabular-nums'],
+        color: T.colors.text,
+        fontSize: 16,
+        fontWeight: '900',
     },
     divider: {
-        height: 0.5, // Hairline
-        backgroundColor: 'rgba(255,255,255,0.15)',
+        height: 2,
+        backgroundColor: T.colors.border,
         marginVertical: 4,
     },
 });
