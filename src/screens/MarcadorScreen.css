@@ -35,7 +35,7 @@
 
 .score-text {
     color: #2F2F2F;
-    font-size: 80px;
+    font-size: clamp(56px, 10vw, 96px);
     font-weight: 900;
     margin-bottom: 16px;
     transition: transform 0.1s ease;
@@ -60,4 +60,14 @@
 .marcador-footer {
     padding-top: 24px;
     padding-bottom: 20px;
+}
+
+@media (min-width: 900px) {
+    .players-container {
+        flex-direction: row;
+    }
+
+    .player-card {
+        min-height: 320px;
+    }
 }

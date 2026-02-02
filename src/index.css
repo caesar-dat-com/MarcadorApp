@@ -2,6 +2,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --bottom-nav-height: 96px;
+  --content-bottom-padding: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 16px);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -15,20 +17,22 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
   overflow: hidden;
 }
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.app-shell {
+  flex: 1;
+  padding-bottom: var(--content-bottom-padding);
+  overflow-y: auto;
 }
 
 button {

@@ -1,8 +1,8 @@
 .bottom-nav {
     position: fixed;
     bottom: 25px;
-    left: 20px;
-    right: 20px;
+    left: 16px;
+    right: 16px;
     height: 70px;
     z-index: 1000;
     display: flex;
@@ -57,4 +57,11 @@
 
 .nav-item.active .icon {
     filter: drop-shadow(0 0 6px rgba(88, 204, 2, 0.5));
+}
+
+@media (min-width: 900px) {
+    .bottom-nav {
+        left: 0;
+        right: 0;
+    }
 }
