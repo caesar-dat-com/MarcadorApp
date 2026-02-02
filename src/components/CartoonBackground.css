@@ -1,0 +1,56 @@
+.cartoon-background {
+    width: 100%;
+    height: 100vh;
+    background-color: #F2F2F2;
+    overflow: hidden;
+    position: relative;
+}
+
+.gradient-layer {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #F2F2F2 0%, #EAF6FF 50%, #EFFFF3 100%);
+    position: relative;
+}
+
+.content-layer {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 999px;
+    opacity: 0.35;
+    filter: blur(40px);
+}
+
+.blob1 {
+    width: 260px;
+    height: 260px;
+    background-color: #1CB0F6;
+    top: -80px;
+    left: -90px;
+}
+
+.blob2 {
+    width: 220px;
+    height: 220px;
+    background-color: #58CC02;
+    bottom: -70px;
+    right: -80px;
+}
+
+.blob3 {
+    width: 140px;
+    height: 140px;
+    background-color: #FFB020;
+    top: 160px;
+    right: -50px;
+}

@@ -1,162 +1,80 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, Alert } from 'react-native';
 import { CartoonBackground } from '../components/CartoonBackground';
 import { CartoonCard } from '../components/CartoonCard';
 import { CartoonButton } from '../components/CartoonButton';
 import { CartoonBadge } from '../components/CartoonBadge';
 import { CartoonTheme as T } from '../theme/cartoonTheme';
 import { CURRENT_USER } from '../services/MockData';
+import './ProfileScreen.css';
 
 const ProfileScreen = () => {
     const user = CURRENT_USER;
 
     const handleEditProfile = () => {
-        Alert.alert('Perfil', 'Próximamente podrás editar tus datos.');
+        alert('Perfil: Próximamente podrás editar tus datos.');
     };
 
     return (
         <CartoonBackground>
-            <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-
+            <div className="profile-scroll-content">
                 {/* Header Avatar Section */}
-                <CartoonCard style={styles.headerCard}>
-                    <View style={styles.avatarWrapper}>
-                        <Image source={{ uri: user.avatarUrl }} style={styles.avatar} />
-                    </View>
-                    <Text style={styles.userName}>{user.name} 👤</Text>
+                <CartoonCard className="header-card">
+                    <div className="avatar-wrapper">
+                        <img src={user.avatarUrl} alt="avatar" className="avatar" />
+                    </div>
+                    <h2 className="user-name">{user.name} 👤</h2>
                     <CartoonBadge text={`${user.rank} • Lvl ${user.level}`} tone="purple" />
 
-                    <CartoonButton
-                        title="EDITAR PERFIL"
-                        leftEmoji="✏️"
-                        variant="ghost"
-                        onPress={handleEditProfile}
-                        style={{ marginTop: T.spacing.md, width: '100%' }}
-                    />
+                    <div style={{ marginTop: '16px', width: '100%' }}>
+                        <CartoonButton
+                            title="EDITAR PERFIL"
+                            leftEmoji="✏️"
+                            variant="ghost"
+                            onPress={handleEditProfile}
+                        />
+                    </div>
                 </CartoonCard>
 
                 {/* Stats Grid */}
-                <View style={styles.statsRow}>
-                    <CartoonCard style={styles.statCard}>
-                        <Text style={styles.statValue}>{user.stats.wins}</Text>
-                        <Text style={styles.statLabel}>VICTORIAS 🏆</Text>
+                <div className="stats-row">
+                    <CartoonCard className="stat-card">
+                        <span className="stat-value">{user.stats.wins}</span>
+                        <span className="stat-label">VICTORIAS 🏆</span>
                     </CartoonCard>
-                    <CartoonCard style={styles.statCard}>
-                        <Text style={styles.statValue}>{user.stats.winRate}</Text>
-                        <Text style={styles.statLabel}>WIN RATE 📈</Text>
+                    <CartoonCard className="stat-card">
+                        <span className="stat-value">{user.stats.winRate}</span>
+                        <span className="stat-label">WIN RATE 📈</span>
                     </CartoonCard>
-                </View>
+                </div>
 
                 {/* Detailed Stats */}
-                <CartoonCard style={styles.detailsCard}>
-                    <Text style={styles.sectionTitle}>TEMPORADA ACTUAL 🌟</Text>
+                <CartoonCard className="details-card">
+                    <h3 className="section-title">TEMPORADA ACTUAL 🌟</h3>
 
-                    <View style={styles.statLine}>
-                        <Text style={styles.label}>Total Partidos</Text>
-                        <Text style={styles.value}>{user.stats.matches}</Text>
-                    </View>
+                    <div className="stat-line">
+                        <span className="label">Total Partidos</span>
+                        <span className="value">{user.stats.matches}</span>
+                    </div>
 
-                    <View style={styles.divider} />
+                    <div className="divider" />
 
-                    <View style={styles.statLine}>
-                        <Text style={styles.label}>Racha Actual</Text>
-                        <Text style={styles.value}>3 🔥</Text>
-                    </View>
+                    <div className="stat-line">
+                        <span className="label">Racha Actual</span>
+                        <span className="value">3 🔥</span>
+                    </div>
 
-                    <CartoonButton
-                        title="VER LOGROS"
-                        leftEmoji="🏅"
-                        variant="blue"
-                        onPress={() => Alert.alert('Logros', '¡Sigue jugando para desbloquear más!')}
-                        style={{ marginTop: T.spacing.md }}
-                    />
+                    <div style={{ marginTop: '16px' }}>
+                        <CartoonButton
+                            title="VER LOGROS"
+                            leftEmoji="🏅"
+                            variant="blue"
+                            onPress={() => alert('Logros: ¡Sigue jugando para desbloquear más!')}
+                        />
+                    </div>
                 </CartoonCard>
-
-            </ScrollView>
+            </div>
         </CartoonBackground>
     );
 };
-
-const styles = StyleSheet.create({
-    scrollContent: {
-        paddingBottom: 110,
-        gap: T.spacing.md,
-    },
-    headerCard: {
-        alignItems: 'center',
-        paddingVertical: T.spacing.xl,
-        marginTop: T.spacing.md,
-    },
-    avatarWrapper: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        backgroundColor: T.colors.bg,
-        borderWidth: 4,
-        borderColor: T.colors.border,
-        marginBottom: T.spacing.md,
-        overflow: 'hidden',
-    },
-    avatar: {
-        width: '100%',
-        height: '100%',
-    },
-    userName: {
-        color: T.colors.text,
-        fontSize: 26,
-        fontWeight: '900',
-        marginBottom: 8,
-    },
-    statsRow: {
-        flexDirection: 'row',
-        gap: T.spacing.md,
-    },
-    statCard: {
-        flex: 1,
-        alignItems: 'center',
-        paddingVertical: T.spacing.lg,
-    },
-    statValue: {
-        color: T.colors.text,
-        fontSize: 32,
-        fontWeight: '900',
-    },
-    statLabel: {
-        color: T.colors.muted,
-        fontSize: 12,
-        fontWeight: '800',
-        marginTop: 4,
-    },
-    detailsCard: {
-        padding: T.spacing.lg,
-    },
-    sectionTitle: {
-        color: T.colors.text,
-        fontSize: 18,
-        fontWeight: '900',
-        marginBottom: T.spacing.md,
-    },
-    statLine: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: 12,
-    },
-    label: {
-        color: T.colors.muted,
-        fontSize: 16,
-        fontWeight: '700',
-        marginBottom: 0,
-    },
-    value: {
-        color: T.colors.text,
-        fontSize: 16,
-        fontWeight: '900',
-    },
-    divider: {
-        height: 2,
-        backgroundColor: T.colors.border,
-        marginVertical: 4,
-    },
-});
 
 export default ProfileScreen;

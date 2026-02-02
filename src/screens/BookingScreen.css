@@ -1,0 +1,124 @@
+.booking-screen {
+    flex: 1;
+    min-height: 100vh;
+    background-image: url('../assets/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-header-title {
+    color: #fff;
+    fontSize: 28px;
+    fontWeight: bold;
+    margin: 0;
+}
+
+.reserve-btn {
+    background-color: #30D158;
+    color: #000;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.booking-list {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.booking-card {
+    margin-bottom: 16px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.court-name {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 10px;
+}
+
+.badge-full {
+    background-color: rgba(255, 69, 58, 0.3);
+}
+
+.badge-open {
+    background-color: rgba(10, 132, 255, 0.3);
+}
+
+.badge-text {
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.host-name {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 0 0 4px 0;
+}
+
+.time {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    margin: 0 0 20px 0;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-challenge {
+    background-color: rgba(255, 69, 58, 0.2);
+    border-color: rgba(255, 69, 58, 0.5);
+}
+
+.btn-join {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,48 @@
+.cartoon-button-wrap {
+    border-radius: 18px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.1s ease;
+    width: 100%;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.cartoon-button-wrap:active {
+    transform: translateY(3px);
+}
+
+.cartoon-button-wrap.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.variant-ghost {
+    border: 2px solid #E9E9E9;
+    border-bottom: 4px solid #E9E9E9;
+}
+
+.button-text {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.button-bottom-shadow {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    top: 4px;
+    border-radius: 18px;
+    z-index: 0;
+    pointer-events: none;
+}

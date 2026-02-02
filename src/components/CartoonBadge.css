@@ -1,0 +1,10 @@
+.cartoon-badge {
+    padding: 6px 10px;
+    border-radius: 999px;
+    display: inline-flex;
+}
+
+.badge-text {
+    font-size: 12px;
+    font-weight: 800;
+}

@@ -1,9 +1,17 @@
-// src/components/CartoonButton.tsx
 import React, { useMemo } from "react";
-import { Pressable, Text, StyleSheet, ViewStyle, View } from "react-native";
 import { CartoonTheme as T } from "../theme/cartoonTheme";
+import "./CartoonButton.css";
 
 type Variant = "green" | "blue" | "orange" | "ghost" | "danger";
+
+interface CartoonButtonProps {
+    title: string;
+    onPress?: () => void;
+    variant?: Variant;
+    disabled?: boolean;
+    style?: React.CSSProperties;
+    leftEmoji?: string;
+}
 
 export function CartoonButton({
     title,
@@ -12,14 +20,7 @@ export function CartoonButton({
     disabled,
     style,
     leftEmoji,
-}: {
-    title: string;
-    onPress?: () => void;
-    variant?: Variant;
-    disabled?: boolean;
-    style?: ViewStyle;
-    leftEmoji?: string;
-}) {
+}: CartoonButtonProps) {
     const palette = useMemo(() => {
         if (variant === "blue") return { bg: T.colors.blue, shadow: T.colors.blueDark, text: "#fff" };
         if (variant === "orange") return { bg: T.colors.orange, shadow: "#E09010", text: "#2F2F2F" };
@@ -29,56 +30,21 @@ export function CartoonButton({
     }, [variant]);
 
     return (
-        <Pressable
-            onPress={disabled ? undefined : onPress}
-            style={({ pressed }) => [
-                styles.wrap,
-                palette.border && styles.ghost,
-                {
-                    backgroundColor: palette.bg,
-                    borderColor: palette.border ? T.colors.border : "transparent",
-                    transform: [{ translateY: pressed ? 3 : 0 }],
-                },
-                disabled && styles.disabled,
-                style,
-            ]}
+        <button
+            onClick={disabled ? undefined : onPress}
+            disabled={disabled}
+            className={`cartoon-button-wrap variant-${variant} ${disabled ? 'disabled' : ''}`}
+            style={{
+                backgroundColor: palette.bg,
+                color: palette.text,
+                borderColor: palette.border ? T.colors.border : "transparent",
+                ...style
+            }}
         >
-            <Text style={[styles.text, { color: palette.text }]}>
+            <span className="button-text">
                 {leftEmoji ? `${leftEmoji} ` : ""}{title}
-            </Text>
-
-            {/* sombra inferior 3D */}
-            <View style={[styles.bottomShadow, { backgroundColor: palette.shadow }]} />
-        </Pressable>
+            </span>
+            <div className="button-bottom-shadow" style={{ backgroundColor: palette.shadow }} />
+        </button>
     );
 }
-
-const styles = StyleSheet.create({
-    wrap: {
-        borderRadius: T.radius.button,
-        paddingVertical: 14,
-        paddingHorizontal: 16,
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-        borderWidth: 0,
-        overflow: 'visible',
-    },
-    ghost: { borderWidth: 2, borderBottomWidth: 4 },
-    disabled: { opacity: 0.6 },
-    text: {
-        fontSize: 15,
-        fontWeight: "800",
-        letterSpacing: 0.4,
-        zIndex: 2,
-    },
-    bottomShadow: {
-        position: 'absolute',
-        bottom: -4,
-        left: 0,
-        right: 0,
-        height: '100%',
-        borderRadius: T.radius.button,
-        zIndex: 0,
-    }
-});

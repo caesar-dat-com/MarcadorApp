@@ -1,7 +1,6 @@
-// src/components/CartoonBadge.tsx
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
 import { CartoonTheme as T } from "../theme/cartoonTheme";
+import "./CartoonBadge.css";
 
 type Tone = "green" | "blue" | "orange" | "red" | "purple" | "gray";
 
@@ -18,21 +17,8 @@ export function CartoonBadge({ text, tone = "gray" }: { text: string; tone?: Ton
     const fg = tone === "gray" ? T.colors.text : "#fff";
 
     return (
-        <View style={[styles.badge, { backgroundColor: map[tone] }]}>
-            <Text style={[styles.badgeText, { color: fg }]}>{text}</Text>
-        </View>
+        <div className="cartoon-badge" style={{ backgroundColor: map[tone], color: fg }}>
+            <span className="badge-text">{text}</span>
+        </div>
     );
 }
-
-const styles = StyleSheet.create({
-    badge: {
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        borderRadius: 999,
-        alignSelf: "flex-start",
-    },
-    badgeText: {
-        fontSize: 12,
-        fontWeight: "800",
-    },
-});

@@ -1,5 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 export interface Match {
     id: string;
     date: string;
@@ -14,7 +12,7 @@ const STORAGE_KEY = '@marcador_app_history';
 export const StorageService = {
     saveMatch: async (matchData: Omit<Match, 'id' | 'date'>): Promise<boolean> => {
         try {
-            const existingHistoryJson = await AsyncStorage.getItem(STORAGE_KEY);
+            const existingHistoryJson = localStorage.getItem(STORAGE_KEY);
             const history: Match[] = existingHistoryJson ? JSON.parse(existingHistoryJson) : [];
 
             const newMatch: Match = {
@@ -24,7 +22,7 @@ export const StorageService = {
             };
 
             const updatedHistory = [newMatch, ...history];
-            await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedHistory));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedHistory));
             return true;
         } catch (error) {
             console.error('storage.saveMatch.failed', { error });
@@ -34,7 +32,7 @@ export const StorageService = {
 
     getHistory: async (): Promise<Match[]> => {
         try {
-            const historyJson = await AsyncStorage.getItem(STORAGE_KEY);
+            const historyJson = localStorage.getItem(STORAGE_KEY);
             return historyJson ? JSON.parse(historyJson) : [];
         } catch (error) {
             console.error('Error loading history:', error);
@@ -44,7 +42,7 @@ export const StorageService = {
 
     clearHistory: async () => {
         try {
-            await AsyncStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem(STORAGE_KEY);
         } catch (error) {
             console.error('Error clearing history:', error);
         }

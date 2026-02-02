@@ -1,199 +1,151 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, Animated, Alert } from 'react-native';
+import React, { useState } from 'react';
 import { CartoonBackground } from '../components/CartoonBackground';
 import { CartoonCard } from '../components/CartoonCard';
 import { CartoonButton } from '../components/CartoonButton';
 import { CartoonTheme as T } from '../theme/cartoonTheme';
-import { useFeedback } from '../hooks/useFeedback';
+// import { useFeedback } from '../hooks/useFeedback'; // Pending migration
 import { StorageService } from '../services/StorageService';
+import './MarcadorScreen.css';
 
 const MarcadorScreen = () => {
   const [scoreA, setScoreA] = useState(0);
   const [scoreB, setScoreB] = useState(0);
-  const feedback = useFeedback();
+  const [animatingA, setAnimatingA] = useState(false);
+  const [animatingB, setAnimatingB] = useState(false);
 
-  // Animations
-  const scaleA = useRef(new Animated.Value(1)).current;
-  const scaleB = useRef(new Animated.Value(1)).current;
-
-  const animateScore = (scaleVal: Animated.Value) => {
-    Animated.sequence([
-      Animated.spring(scaleVal, { toValue: 1.3, useNativeDriver: true, tension: 100, friction: 3 }),
-      Animated.spring(scaleVal, { toValue: 1, useNativeDriver: true, tension: 100, friction: 3 })
-    ]).start();
+  const triggerAnimation = (player: 'A' | 'B') => {
+    if (player === 'A') {
+      setAnimatingA(true);
+      setTimeout(() => setAnimatingA(false), 300);
+    } else {
+      setAnimatingB(true);
+      setTimeout(() => setAnimatingB(false), 300);
+    }
   };
 
   const incrementScore = (player: 'A' | 'B') => {
-    feedback.success();
+    // feedback.success(); 
     if (player === 'A') {
       setScoreA(prev => prev + 1);
-      animateScore(scaleA);
+      triggerAnimation('A');
     } else {
       setScoreB(prev => prev + 1);
-      animateScore(scaleB);
+      triggerAnimation('B');
     }
   };
 
   const decrementScore = (player: 'A' | 'B') => {
-    feedback.light();
+    // feedback.light();
     if (player === 'A') setScoreA(prev => Math.max(0, prev - 1));
     else setScoreB(prev => Math.max(0, prev - 1));
   };
 
   const resetMatch = () => {
-    feedback.medium();
+    // feedback.medium();
     setScoreA(0);
     setScoreB(0);
   };
 
   const handleSaveMatch = async () => {
     if (scoreA === 0 && scoreB === 0) {
-      feedback.error();
-      Alert.alert('¡Ups!', 'No puedes guardar un partido sin puntos. ¡A jugar! 🎾');
+      // feedback.error();
+      alert('¡Ups! No puedes guardar un partido sin puntos. ¡A jugar! 🎾');
       return;
     }
 
     const winner = scoreA > scoreB ? 'Jugador 1' : scoreA < scoreB ? 'Jugador 2' : 'Empate';
 
     try {
-      const saved = await StorageService.saveMatch({
+      await StorageService.saveMatch({
         winner,
         score: `${scoreA} - ${scoreB}`,
         player1Name: 'Jugador 1',
         player2Name: 'Jugador 2',
       });
-      if (!saved) {
-        throw new Error('StorageService.saveMatch returned failure');
+      // feedback.success();
+      if (window.confirm('¡Genial! ✨ Tu partido ha sido guardado. ¿Quieres reiniciar el tablero?')) {
+        resetMatch();
       }
-      feedback.success();
-      Alert.alert('¡Genial! ✨', 'Tu partido ha sido guardado en el historial.', [
-        { text: '¡LISTO!', onPress: resetMatch }
-      ]);
     } catch (error) {
-      console.error('match.save.failed', { error, scoreA, scoreB, winner });
-      feedback.error();
-      Alert.alert('Error', 'Hubo un problema al guardar el partido.');
+      console.error('match.save.failed', error);
+      alert('Hubo un problema al guardar el partido.');
     }
   };
 
   return (
     <CartoonBackground>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>MATCH PLAY 🎾</Text>
-      </View>
+      <div className="marcador-header">
+        <h1 className="marcador-title">MATCH PLAY 🎾</h1>
+      </div>
 
-      <View style={styles.playersContainer}>
+      <div className="players-container">
         {/* Jugador 1 */}
-        <CartoonCard style={styles.playerCard}>
-          <Text style={styles.playerLabel}>JUGADOR 1</Text>
-          <Animated.Text style={[styles.scoreText, { transform: [{ scale: scaleA }] }]}>
+        <CartoonCard className="player-card">
+          <span className="player-label">JUGADOR 1</span>
+          <div className={`score-text ${animatingA ? 'score-bump' : ''}`}>
             {scoreA}
-          </Animated.Text>
-          <View style={styles.controls}>
+          </div>
+          <div className="controls">
             <CartoonButton
               title="-"
               onPress={() => decrementScore('A')}
               variant="ghost"
-              style={styles.circleBtn}
+              className="circle-btn"
+              style={{ width: '60px', height: '60px', borderRadius: '30px', padding: 0 }}
             />
             <CartoonButton
               title="+"
               onPress={() => incrementScore('A')}
               variant="green"
-              style={styles.circleBtn}
+              className="circle-btn"
+              style={{ width: '60px', height: '60px', borderRadius: '30px', padding: 0 }}
             />
-          </View>
+          </div>
         </CartoonCard>
 
         {/* Jugador 2 */}
-        <CartoonCard style={styles.playerCard}>
-          <Text style={styles.playerLabel}>JUGADOR 2</Text>
-          <Animated.Text style={[styles.scoreText, { transform: [{ scale: scaleB }] }]}>
+        <CartoonCard className="player-card">
+          <span className="player-label">JUGADOR 2</span>
+          <div className={`score-text ${animatingB ? 'score-bump' : ''}`}>
             {scoreB}
-          </Animated.Text>
-          <View style={styles.controls}>
+          </div>
+          <div className="controls">
             <CartoonButton
               title="-"
               onPress={() => decrementScore('B')}
               variant="ghost"
-              style={styles.circleBtn}
+              className="circle-btn"
+              style={{ width: '60px', height: '60px', borderRadius: '30px', padding: 0 }}
             />
             <CartoonButton
               title="+"
               onPress={() => incrementScore('B')}
               variant="blue"
-              style={styles.circleBtn}
+              className="circle-btn"
+              style={{ width: '60px', height: '60px', borderRadius: '30px', padding: 0 }}
             />
-          </View>
+          </div>
         </CartoonCard>
-      </View>
+      </div>
 
-      <View style={styles.footer}>
+      <div className="marcador-footer">
         <CartoonButton
           title="FINALIZAR PARTIDO"
           leftEmoji="🏁"
           variant="green"
           onPress={handleSaveMatch}
         />
-        <CartoonButton
-          title="Reiniciar Tablero"
-          leftEmoji="🔄"
-          variant="ghost"
-          onPress={resetMatch}
-          style={{ marginTop: 12 }}
-        />
-      </View>
+        <div style={{ marginTop: '12px' }}>
+          <CartoonButton
+            title="Reiniciar Tablero"
+            leftEmoji="🔄"
+            variant="ghost"
+            onPress={resetMatch}
+          />
+        </div>
+      </div>
     </CartoonBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {
-    alignItems: 'center',
-    paddingVertical: T.spacing.lg,
-  },
-  headerTitle: {
-    color: T.colors.text,
-    fontSize: 22,
-    fontWeight: '900',
-    letterSpacing: 1,
-  },
-  playersContainer: {
-    flex: 1,
-    gap: T.spacing.md,
-  },
-  playerCard: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  playerLabel: {
-    color: T.colors.muted,
-    fontSize: 14,
-    fontWeight: '800',
-    marginBottom: T.spacing.xs,
-  },
-  scoreText: {
-    color: T.colors.text,
-    fontSize: 80,
-    fontWeight: '900',
-    marginBottom: T.spacing.md,
-  },
-  controls: {
-    flexDirection: 'row',
-    gap: T.spacing.lg,
-  },
-  circleBtn: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-  },
-  footer: {
-    paddingTop: T.spacing.xl,
-    paddingBottom: 100, // Space for tab bar
-  },
-});
 
 export default MarcadorScreen;

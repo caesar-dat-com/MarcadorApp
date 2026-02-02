@@ -1,0 +1,94 @@
+.historial-screen {
+    flex: 1;
+    min-height: 100vh;
+    background-image: url('../assets/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding-bottom: 100px;
+}
+
+.historial-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.historial-header-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 34px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.clear-button {
+    padding: 8px 12px;
+    background-color: rgba(255, 59, 48, 0.2);
+    color: #FF3B30;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.historial-list {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.empty-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.empty-text {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 18px;
+    font-style: italic;
+}
+
+.historial-card {
+    margin-bottom: 16px;
+}
+
+.historial-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score {
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 900;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.winner {
+    color: #30D158;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+}
+
+.match-details {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 0;
+}
