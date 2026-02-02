@@ -1,42 +1,40 @@
 .booking-screen {
     flex: 1;
     min-height: 100vh;
-    background-image: url('../assets/background.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding-bottom: 100px;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+    padding-bottom: var(--content-bottom-padding);
 }
 
 .booking-header {
-    padding: 20px;
+    padding: 12px 4px 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .booking-header-title {
-    color: #fff;
-    fontSize: 28px;
-    fontWeight: bold;
+    color: #2F2F2F;
+    font-size: 28px;
+    font-weight: 900;
     margin: 0;
 }
 
 .reserve-btn {
-    background-color: #30D158;
-    color: #000;
+    background-color: #58CC02;
+    color: #fff;
     font-weight: 700;
     font-size: 12px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 2px solid #46A302;
+    box-shadow: 0 3px 0 #46A302;
     cursor: pointer;
 }
 
 .booking-list {
-    padding: 16px;
+    padding: 8px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,7 +42,8 @@
 }
 
 .booking-card {
-    margin-bottom: 16px;
+    width: min(100%, 640px);
+    gap: 8px;
 }
 
 .card-header {
@@ -55,39 +54,20 @@
 }
 
 .court-name {
-    color: #fff;
+    color: #2F2F2F;
     font-size: 18px;
     font-weight: 700;
     margin: 0;
 }
 
-.badge {
-    padding: 4px 10px;
-    border-radius: 10px;
-}
-
-.badge-full {
-    background-color: rgba(255, 69, 58, 0.3);
-}
-
-.badge-open {
-    background-color: rgba(10, 132, 255, 0.3);
-}
-
-.badge-text {
-    color: #fff;
-    font-size: 10px;
-    font-weight: 800;
-}
-
 .host-name {
-    color: rgba(255, 255, 255, 0.7);
+    color: #6D6D6D;
     font-size: 14px;
     margin: 0 0 4px 0;
 }
 
 .time {
-    color: rgba(255, 255, 255, 0.5);
+    color: #8C8C8C;
     font-size: 12px;
     margin: 0 0 20px 0;
 }
@@ -100,8 +80,8 @@
 .action-btn {
     flex: 1;
     padding: 12px;
-    border-radius: 15px;
-    border: 1px solid transparent;
+    border-radius: 14px;
+    border: 2px solid transparent;
     cursor: pointer;
     font-family: inherit;
     font-weight: 700;
@@ -114,11 +94,13 @@
 }
 
 .btn-challenge {
-    background-color: rgba(255, 69, 58, 0.2);
-    border-color: rgba(255, 69, 58, 0.5);
+    background-color: #FF4B4B;
+    border-color: #D63B3B;
+    box-shadow: 0 3px 0 #D63B3B;
 }
 
 .btn-join {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    background-color: #1CB0F6;
+    border-color: #1593CC;
+    box-shadow: 0 3px 0 #1593CC;
 }

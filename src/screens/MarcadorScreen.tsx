@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartoonBackground } from '../components/CartoonBackground';
 import { CartoonCard } from '../components/CartoonCard';
 import { CartoonButton } from '../components/CartoonButton';
@@ -8,10 +9,13 @@ import { StorageService } from '../services/StorageService';
 import './MarcadorScreen.css';
 
 const MarcadorScreen = () => {
+  const navigate = useNavigate();
   const [scoreA, setScoreA] = useState(0);
   const [scoreB, setScoreB] = useState(0);
   const [animatingA, setAnimatingA] = useState(false);
   const [animatingB, setAnimatingB] = useState(false);
+  const [playerAName, setPlayerAName] = useState('Jugador 1');
+  const [playerBName, setPlayerBName] = useState('Jugador 2');
 
   const triggerAnimation = (player: 'A' | 'B') => {
     if (player === 'A') {
@@ -53,19 +57,22 @@ const MarcadorScreen = () => {
       return;
     }
 
-    const winner = scoreA > scoreB ? 'Jugador 1' : scoreA < scoreB ? 'Jugador 2' : 'Empate';
+    const normalizedPlayerA = playerAName.trim() || 'Jugador 1';
+    const normalizedPlayerB = playerBName.trim() || 'Jugador 2';
+    const winner = scoreA > scoreB ? normalizedPlayerA : scoreA < scoreB ? normalizedPlayerB : 'Empate';
 
     try {
       await StorageService.saveMatch({
         winner,
         score: `${scoreA} - ${scoreB}`,
-        player1Name: 'Jugador 1',
-        player2Name: 'Jugador 2',
+        player1Name: normalizedPlayerA,
+        player2Name: normalizedPlayerB,
       });
       // feedback.success();
       if (window.confirm('¡Genial! ✨ Tu partido ha sido guardado. ¿Quieres reiniciar el tablero?')) {
         resetMatch();
       }
+      navigate('/app/historial');
     } catch (error) {
       console.error('match.save.failed', error);
       alert('Hubo un problema al guardar el partido.');
@@ -75,13 +82,18 @@ const MarcadorScreen = () => {
   return (
     <CartoonBackground>
       <div className="marcador-header">
-        <h1 className="marcador-title">MATCH PLAY 🎾</h1>
+        <h1 className="marcador-title">Marcador de Pádel 🎾</h1>
       </div>
 
       <div className="players-container">
         {/* Jugador 1 */}
         <CartoonCard className="player-card">
-          <span className="player-label">JUGADOR 1</span>
+          <input
+            className="player-input"
+            value={playerAName}
+            onChange={(event) => setPlayerAName(event.target.value)}
+            placeholder="Nombre jugador 1"
+          />
           <div className={`score-text ${animatingA ? 'score-bump' : ''}`}>
             {scoreA}
           </div>
@@ -89,7 +101,7 @@ const MarcadorScreen = () => {
             <CartoonButton
               title="-"
               onPress={() => decrementScore('A')}
-              variant="ghost"
+              variant="danger"
               className="circle-btn"
               style={{ width: '60px', height: '60px', borderRadius: '30px', padding: 0 }}
             />
@@ -105,7 +117,12 @@ const MarcadorScreen = () => {
 
         {/* Jugador 2 */}
         <CartoonCard className="player-card">
-          <span className="player-label">JUGADOR 2</span>
+          <input
+            className="player-input"
+            value={playerBName}
+            onChange={(event) => setPlayerBName(event.target.value)}
+            placeholder="Nombre jugador 2"
+          />
           <div className={`score-text ${animatingB ? 'score-bump' : ''}`}>
             {scoreB}
           </div>
@@ -113,7 +130,7 @@ const MarcadorScreen = () => {
             <CartoonButton
               title="-"
               onPress={() => decrementScore('B')}
-              variant="ghost"
+              variant="danger"
               className="circle-btn"
               style={{ width: '60px', height: '60px', borderRadius: '30px', padding: 0 }}
             />
