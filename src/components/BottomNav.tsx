@@ -7,16 +7,16 @@ const BottomNav = () => {
         <nav className="bottom-nav">
             <div className="glass-background" />
             <div className="nav-items">
-                <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                <NavLink to="/app/marcador" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                     <span className="icon">🏠</span>
                 </NavLink>
-                <NavLink to="/reservas" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                <NavLink to="/app/reservas" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                     <span className="icon">📅</span>
                 </NavLink>
-                <NavLink to="/historial" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                <NavLink to="/app/historial" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                     <span className="icon">📜</span>
                 </NavLink>
-                <NavLink to="/perfil" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                <NavLink to="/app/perfil" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                     <span className="icon">👤</span>
                 </NavLink>
             </div>

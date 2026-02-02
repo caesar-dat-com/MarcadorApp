@@ -1,6 +1,6 @@
 # MarcadorApp 🍎
 
-An elegant, Apple-inspired React Native application for managing sports matches, player profiles, and court reservations.
+An elegant, Apple-inspired Progressive Web App (PWA) for managing sports matches, player profiles, and court reservations.
 
 ## Features
 
@@ -25,28 +25,37 @@ An elegant, Apple-inspired React Native application for managing sports matches,
 -   **Challenge Mode**: "Retar" (Challenge) existing teams directly from the list.
 
 ## Tech Stack
--   **React Native**: Core framework.
--   **React Navigation**: Tab-based navigation system.
--   **AsyncStorage**: Local data persistence.
+-   **React + React Router**: Web UI with client-side navigation.
+-   **Vite**: Development server and production bundler.
+-   **Vite PWA**: Manifest + service worker generation.
+-   **LocalStorage**: Local data persistence.
 -   **TypeScript**: Type safety for data models.
 
-## How to Run
+## How to Run (Web)
 
 1.  **Install Dependencies**:
     ```bash
     npm install
     ```
 
-2.  **Start Metro Bundler**:
+2.  **Start the Dev Server**:
     ```bash
-    npm start
+    npm run dev
     ```
 
-3.  **Run on Android**:
+3.  **Build for Production**:
     ```bash
-    npm run android
+    npm run build
     ```
-    *Note: Ensure you have an Android Emulator running (e.g., `emulator -avd Medium_Phone_API_36.1`).*
+
+4.  **Preview the Production Build**:
+    ```bash
+    npm run preview
+    ```
+
+## PWA Install
+-   Open the app in a supported mobile browser (Chrome, Edge, Safari).
+-   Use **"Add to Home Screen"** or **"Install app"** to install.
 
 ## Asset Credits
 -   **Mesh Gradient**: Custom generated "Apple Style" wallpaper.
