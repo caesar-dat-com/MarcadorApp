@@ -34,13 +34,14 @@ const BookingScreen = () => {
                     {bookings.map((item) => {
                         const missing = item.playersMax - item.playersCurrent;
                         const isFull = missing <= 0;
+                        const badgeText = isFull ? 'LLENO' : missing === 1 ? 'FALTA 1' : `FALTAN ${missing}`;
 
                         return (
                             <CartoonCard key={item.id} className="booking-card">
                                 <div className="card-header">
                                     <h2 className="court-name">{item.courtName}</h2>
                                     <CartoonBadge
-                                        text={isFull ? 'LLENO' : `FALTAN ${missing}`}
+                                        text={badgeText}
                                         tone={isFull ? 'red' : 'blue'}
                                     />
                                 </div>

@@ -33,6 +33,26 @@
     margin-bottom: 8px;
 }
 
+.player-input {
+    width: 100%;
+    max-width: 220px;
+    text-align: center;
+    border: 2px solid #E9E9E9;
+    border-radius: 14px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2F2F2F;
+    background: rgba(255, 255, 255, 0.85);
+    margin-bottom: 12px;
+}
+
+.player-input:focus {
+    outline: none;
+    border-color: #1CB0F6;
+    box-shadow: 0 0 0 3px rgba(28, 176, 246, 0.2);
+}
+
 .score-text {
     color: #2F2F2F;
     font-size: clamp(56px, 10vw, 96px);
